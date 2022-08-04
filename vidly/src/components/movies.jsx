@@ -5,16 +5,19 @@ class Movies extends Component {
   state = {
     movies: getMovies(),
   };
+
   handleDelete = movie => {
     const movies = this.state.movies.filter(m => m._id !== movie._id);
     this.setState({ movies });
   };
   render() {
     const { length: count } = this.state.movies;
-    if (count === 0) return <p>There are no movies in the database</p>;
+    if (count === 0) return <h2>You Delete all movies</h2>;
     return (
-      <div>
-        <p>Showing {count} movies in the database.</p>
+      <React.Fragment>
+        <h2 style={{ textAlign: "center" }}>
+          There is still {count} movies in the DB.
+        </h2>
         <table className="table">
           <thead>
             <tr>
@@ -22,7 +25,6 @@ class Movies extends Component {
               <th scope="col">Genre</th>
               <th scope="col">Stock</th>
               <th scope="col">Rate</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -36,14 +38,14 @@ class Movies extends Component {
                   <button
                     onClick={() => this.handleDelete(movie)}
                     className="btn btn-danger">
-                    Delete
+                    DELETE
                   </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </React.Fragment>
     );
   }
 }
