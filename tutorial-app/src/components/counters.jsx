@@ -5,6 +5,7 @@ class Counters extends Component {
   render() {
     return (
       <React.Fragment>
+        <button onClick={this.props.onReset}>Reset</button>
         {this.props.counters.map(counter => (
           <Counter
             key={counter.id}
