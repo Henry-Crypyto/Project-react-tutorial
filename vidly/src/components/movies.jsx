@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import Like from "./common/like";
 class Movies extends Component {
   state = {
     movies: getMovies(),
@@ -18,6 +20,7 @@ class Movies extends Component {
         <h2 style={{ textAlign: "center" }}>
           There is still {count} movies in the DB.
         </h2>
+        <FontAwesomeIcon icon={["far", "coffee"]} />
         <table className="table">
           <thead>
             <tr>
@@ -25,6 +28,8 @@ class Movies extends Component {
               <th scope="col">Genre</th>
               <th scope="col">Stock</th>
               <th scope="col">Rate</th>
+              <th />
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -34,6 +39,9 @@ class Movies extends Component {
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
+                <td>
+                  <Like />
+                </td>
                 <td>
                   <button
                     onClick={() => this.handleDelete(movie)}

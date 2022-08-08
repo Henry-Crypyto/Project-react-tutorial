@@ -21,6 +21,13 @@ class App extends Component {
     counters[index].value++;
     this.setState({ counters });
   };
+  handleDecrement = product => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(product);
+    counters[index] = { ...product };
+    counters[index].value--;
+    this.setState({ counters });
+  };
   handleReset = counterReset => {
     const counters = this.state.counters.map(m => {
       m.value = 0;
@@ -44,6 +51,7 @@ class App extends Component {
             onIncrement={this.handleIncrement}
             onDelete={this.handleDelete}
             onReset={this.handleReset}
+            onDecrement={this.handleDecrement}
           />
         </main>
       </React.Fragment>
