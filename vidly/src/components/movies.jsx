@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import Like from "./common/like";
 class Movies extends Component {
   state = {
@@ -10,6 +9,12 @@ class Movies extends Component {
 
   handleDelete = movie => {
     const movies = this.state.movies.filter(m => m._id !== movie._id);
+    this.setState({ movies });
+  };
+  handleLiked = movie => {
+    const movies = [...this.state.movies];
+    const Index = movies.indexOf(movie);
+    movies[Index].liked = !movies[Index].liked;
     this.setState({ movies });
   };
   render() {
@@ -21,13 +26,13 @@ class Movies extends Component {
           There is still {count} movies in the DB.
         </h2>
         <FontAwesomeIcon icon={["far", "coffee"]} />
-        <table className="table">
+        <table className='table'>
           <thead>
             <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Genre</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Rate</th>
+              <th scope='col'>Title</th>
+              <th scope='col'>Genre</th>
+              <th scope='col'>Stock</th>
+              <th scope='col'>Rate</th>
               <th />
               <th />
             </tr>
@@ -40,12 +45,15 @@ class Movies extends Component {
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
                 <td>
-                  <Like />
+                  <Like
+                    liked={movie.liked}
+                    onClick={() => this.handleLiked(movie)}
+                  />
                 </td>
                 <td>
                   <button
                     onClick={() => this.handleDelete(movie)}
-                    className="btn btn-danger">
+                    className='btn btn-danger'>
                     DELETE
                   </button>
                 </td>
